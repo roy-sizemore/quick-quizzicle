@@ -1,0 +1,53 @@
+#div-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;   
+}
+
+#btn.hideme {
+    display: none;
+}
+
+#btn {
+    position: relative;
+    background-color: darkslateblue;
+    display: flex;
+    color: aliceblue;
+    font-size: 60px;
+    justify-content: center;
+    height: 15%;
+    width: 50%;
+    border-radius: 15px;
+    outline: none;
+}
+
+#btn:hover {
+    cursor: pointer;
+}
+
+#timer {
+    display: flex;
+    justify-content: right;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+#view-hs {
+    display: flex;
+    justify-content: left;
+    color: black;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.qust {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: black;
+    font-size: 35px;
+    padding-top: 5px;
+}
+

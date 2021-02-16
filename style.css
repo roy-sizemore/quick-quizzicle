@@ -1,22 +1,24 @@
 #div-btn {
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: center;   
+    height: 95vh;
+    width: 95vw;
 }
 
-#btn.hideme {
+#div-btn.hideme {
     display: none;
 }
 
 #btn {
-    position: relative;
-    background-color: darkslateblue;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: darkslateblue;
     color: aliceblue;
     font-size: 60px;
-    justify-content: center;
-    height: 15%;
-    width: 50%;
+    height: 12%;
+    width: 60%;
     border-radius: 15px;
     outline: none;
 }
@@ -27,27 +29,46 @@
 
 #timer {
     display: flex;
+    float: right;
     justify-content: right;
     color: black;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 25px;
+    font-size: 12px;
     font-weight: bold;
-    padding: 10px;
+    padding: 5px;
 }
 
 #view-hs {
     display: flex;
+    float: left;
     justify-content: left;
     color: black;
-    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
     font-weight: bold;
+    padding: 5px;
 }
 
 .qust {
+    display: flex;
+    justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     color: black;
-    font-size: 35px;
-    padding-top: 5px;
+    font-size: 20px;
+    padding-top: 50px;
+    height: 60px;
+    width: 50%;
 }
 
+/* From Week 2, Activity 28 */
+.answer-card {
+    border-radius: 8px;
+    transition: all 0.5s ease-in-out;
+  }
+  
+  .answer-card:hover {
+    box-shadow: inset 0px 0px 8px rgba(232, 102, 236, 1), 0 0 15px rgba(232, 102, 236, 1);
+  }
+
+  

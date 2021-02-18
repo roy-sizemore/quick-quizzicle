@@ -1,6 +1,3 @@
-// quickQuest()
-// endCondition()
-
 // Questions and answers derived from: https://www.guru99.com/javascript-interview-questions-answers.html
 let score = 0;
 let highScore = [];
@@ -78,6 +75,7 @@ const questionArr = [
         'Adds an element at the beginning of an array']
     }];
 
+// Timer with view high scores button
 function timerCountdown() {
     seconds = 3;
     hideStartButton();
@@ -94,12 +92,14 @@ function timerCountdown() {
     intervalId = setInterval(stopTimer, 1000);
 };
 
+// Hides title, rules and start button on click
 function hideStartButton() {
     document.querySelector('#div-btn').classList.add('hideme');
 };
 
 startBtn.addEventListener("click", timerCountdown);
 
+// Adds questions and answers as ordered list. Correct answers increase score, incorrect answers subtract 1s from timer
 function quickQuest() {;
 
     let ol = document.querySelector('.qust').createElement('ol').innerHTML = questionArr[0].ask;
@@ -119,6 +119,7 @@ function quickQuest() {;
 
 quickQuest();
 
+// Input initials and view highscores
 // function endCondition() {
 //     document.querySelector('#qust').style.display('none');
 //     document.innerHTML(???);

@@ -1,3 +1,4 @@
+/* Start button */
 #div-btn {
     display: flex;
     justify-content: center;
@@ -27,6 +28,7 @@
     cursor: pointer;
 }
 
+/* Timer */
 #timer {
     display: flex;
     float: right;
@@ -38,6 +40,7 @@
     padding: 5px;
 }
 
+/* View high scores clickable */
 #view-hs {
     display: flex;
     float: left;
@@ -49,6 +52,7 @@
     padding: 5px;
 }
 
+/* Question */
 .qust {
     display: flex;
     justify-content: center;
@@ -61,7 +65,7 @@
     width: 50%;
 }
 
-/* From Week 2, Activity 28 */
+/* Answer flex animation from Week 2, Activity 28 */
 .answer-card {
     border-radius: 8px;
     transition: all 0.5s ease-in-out;

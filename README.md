@@ -12,7 +12,7 @@ Rules:
 
 5.) Click retry to retake the quiz and attempt to earn a higher score
 
-Written in JavaScript, HTML and CSS. For OSU Coding Bootcamp homework 4, Web APIs Code Quiz.
+Written using JavaScript, HTML and CSS. For OSU Coding Bootcamp homework 4, Web APIs Code Quiz.
 
 Link to published site:
 [Coming Soon]

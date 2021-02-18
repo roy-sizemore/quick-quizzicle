@@ -6,89 +6,77 @@ let score = 0;
 let highScore = [];
 let initials = ''
 const startBtn = document.querySelector("#btn");
-const question0 = {
-    ask = 'What are global variables?',
-    answer0 = 'Variables that are available throughout the length of the code',
-    answer1 = '',
-    answer2 = '',
-    answer3 = ''
-};
-const question1 = {
-    ask = 'What is a prompt?',
-    answer0 = 'A box that allows the user to enter input by providing a text area within the box',
-    answer1 = '',
-    answer2 = '',
-    answer3 = ''
-};
-const question2 = {
-    ask = "What is the keyword 'this'?",
-    answer0 = 'Refers to the object from where it was called',
-    answer1 = '',
-    answer2 = '',
-    answer3 = ''
-};
-const question3 = {
-    ask = 'What is the === operator?',
-    answer0 = 'Strict equality operator',
-    answer1 = '',
-    answer2 = '',
-    answer3 = ''
-};
-const question4 = {
-    ask = 'What is NULL?',
-    answer0 = 'Value used to represent no value or no object',
-    answer1 = '',
-    answer2 = '',
-    answer3 = ''
-};
-const question5 = {
-    ask = 'What is typeOf?',
-    answer0 = 'An operator that is used to return a string description of the type of a variable',
-    answer1 = '',
-    answer2 = '',
-    answer3 = ''
-};
-const question6 = {
-    ask = 'What is the unshift method?',
-    answer0 = 'Adds an element at the beginning of an array',
-    answer1 = '',
-    answer2 = '',
-    answer3 = ''
-};
-const question7 = {
-    ask = 'What is event bubbling?',
-    answer0 = 'When elements are nested, if the handler of the child is clicked, the handler of parent will also work as if it were clicked',
-    answer1 = '',
-    answer2 = '',
-    answer3 = ''
-};
-const question8 = {
-    ask = 'What is a looping structure in JavaScript?',
-    answer0 = 'for',
-    answer1 = '',
-    answer2 = '',
-    answer3 = ''
-};
-const question9 = {
-    ask = 'Which is used for comments in Javascript?',
-    answer0 = '//',
-    answer1 = '',
-    answer2 = '',
-    answer3 = ''
-};
-
-/*
-const AnsArr = ['Variables that are available throughout the length of the code',
-    'A box that allows the user to enter input by providing a text area within the box.',
-    "Refers to the object from where it was called.",
-    'Strict equality operator',
-    'Value used to represent no value or no object.',
-    'An operator that is used to return a string description of the type of a variable.',
-    'Adds an element at the beginning of an array',
-    'When elements are nested, if the handler of the child is clicked, the handler of parent will also work as if it were clicked.',
-    'for, while and do-while',
-    '//'];
-*/
+const questionArr = [
+    {
+    ask: 'What are global variables?',
+    correct: 'They are available throughout the length of the code',
+    wrong: ['for, while and do-while',
+        'A box that allows the user to enter input by providing a text area within the box',
+        'Variables that are available throughout the length of the code']
+    },
+    {
+    ask: 'What is a prompt?',
+    correct: 'A box that allows the user to enter input by providing a text area within the box',
+    wrong: ['Value used to represent no value or no object',
+        'When elements are nested, if the handler of the child is clicked, the handler of parent will also work as if it were clicked',
+        'A box that allows the user to enter input by providing a text area within the box']
+    },
+    {
+    ask: "What is the keyword 'this'?",
+    correct: 'Refers to the object from where it was called',
+    wrong: ['When elements are nested, if the handler of the child is clicked, the handler of parent will also work as if it were clicked',
+        'Strict equality operator',
+        'for, while and do-while']
+    },
+    {
+    ask: 'What is the === operator?',
+    correct: 'Strict equality',
+    wrong: ['Variables that are available throughout the length of the code',
+        'A box that allows the user to enter input by providing a text area within the box',
+        'Value used to represent no value or no object']
+    },
+    {
+    ask: 'What is NULL?',
+    correct: 'Value used to represent no value or no object',
+    wrong: ['Variables that are available throughout the length of the code',
+        'Value used to represent no value or no object',
+        'Strict equality operator']
+    },
+    {
+    ask: 'What is typeOf?',
+    correct: 'An operator that is used to return a string description of the type of a variable',
+    wrong: ['Strict equality operator',
+        'A box that allows the user to enter input by providing a text area within the box',
+        'for, while and do-while']
+    },
+    {
+    ask: 'What is the unshift method?',
+    correct: 'Adds an element at the beginning of an array',
+    wrong: ['When elements are nested, if the handler of the child is clicked, the handler of parent will also work as if it were clicked',
+        'for, while and do-while',
+        'Variables that are available throughout the length of the code']
+    },
+    {
+    ask: 'What is event bubbling?',
+    correct: 'When elements are nested, if the handler of the child is clicked, the handler of parent will also work as if it were clicked',
+    wrong: ['for, while and do-while',
+        'An operator that is used to return a string description of the type of a variable',
+        'Refers to the object from where it was called']
+    },
+    {
+    ask: 'What is a looping structure in JavaScript?',
+    correct: 'for',
+    wrong: ['Variables that are available throughout the length of the code',
+        'Refers to the object from where it was called',
+        'Strict equality operator']
+    },
+    {
+    ask: 'Which is used for comments in Javascript?',
+    correct: '//',
+    wrong: ['for, while and do-while',
+        'Strict equality operator',
+        'Adds an element at the beginning of an array']
+    }];
 
 function timerCountdown() {
     seconds = 3;
@@ -101,7 +89,6 @@ function timerCountdown() {
         if (seconds < 0) {
             clearInterval(intervalId);
             // endCondition();
-            alert("Time, gentlemen");
         };
     };
     intervalId = setInterval(stopTimer, 1000);
@@ -113,11 +100,11 @@ function hideStartButton() {
 
 startBtn.addEventListener("click", timerCountdown);
 
-function quickQuest() {
-    i = 0;
+function quickQuest() {;
 
-    document.querySelector('.qust').textContent = question0;
-        
+    let ol = document.querySelector('.qust').createElement('ol').innerHTML = questionArr[0].ask;
+    let li = document.querySelector('.answer-card').createElement('li').innerHTML = questionArr[0].correct;
+    ol.appendChild(li);
     
     // ansArr[i] w/wrong answers. Clickable buttons that reset the page and displays the next question
 

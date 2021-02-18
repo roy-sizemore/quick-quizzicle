@@ -2,8 +2,7 @@
 let score = 0;
 let highScore = [];
 let initials = ''
-let questIndex = 0;
-let ol = createElement('ol');
+let corrAns = '';
 const startBtn = document.querySelector('#btn');
 
 
@@ -11,70 +10,70 @@ const questionArr = [
     {
     ask: 'What are global variables?',
     correct: 'They are available throughout the length of the code',
-    wrong: ['for, while and do-while',
+    wrong: ['They are available throughout the length of the code', 'for, while and do-while',
         'A box that allows the user to enter input by providing a text area within the box',
         'Variables that are available throughout the length of the code']
     },
     {
     ask: 'What is a prompt?',
     correct: 'A box that allows the user to enter input by providing a text area within the box',
-    wrong: ['Value used to represent no value or no object',
+    wrong: ['A box that allows the user to enter input by providing a text area within the box', 'Value used to represent no value or no object',
         'When elements are nested, if the handler of the child is clicked, the handler of parent will also work as if it were clicked',
         'A box that allows the user to enter input by providing a text area within the box']
     },
     {
     ask: "What is the keyword 'this'?",
     correct: 'Refers to the object from where it was called',
-    wrong: ['When elements are nested, if the handler of the child is clicked, the handler of parent will also work as if it were clicked',
+    wrong: ['Refers to the object from where it was called', 'When elements are nested, if the handler of the child is clicked, the handler of parent will also work as if it were clicked',
         'Strict equality operator',
         'for, while and do-while']
     },
     {
     ask: 'What is the === operator?',
     correct: 'Strict equality',
-    wrong: ['Variables that are available throughout the length of the code',
+    wrong: ['Strict equality', 'Variables that are available throughout the length of the code',
         'A box that allows the user to enter input by providing a text area within the box',
         'Value used to represent no value or no object']
     },
     {
     ask: 'What is NULL?',
     correct: 'Value used to represent no value or no object',
-    wrong: ['Variables that are available throughout the length of the code',
-        'Value used to represent no value or no object',
+    wrong: ['Value used to represent no value or no object', 'Variables that are available throughout the length of the code',
+        'A box that allows the user to enter input by providing a text area within the box',
         'Strict equality operator']
     },
     {
     ask: 'What is typeOf?',
     correct: 'An operator that is used to return a string description of the type of a variable',
-    wrong: ['Strict equality operator',
+    wrong: ['An operator that is used to return a string description of the type of a variable', 'Strict equality operator',
         'A box that allows the user to enter input by providing a text area within the box',
         'for, while and do-while']
     },
     {
     ask: 'What is the unshift method?',
     correct: 'Adds an element at the beginning of an array',
-    wrong: ['When elements are nested, if the handler of the child is clicked, the handler of parent will also work as if it were clicked',
+    wrong: ['Adds an element at the beginning of an array', 'When elements are nested, if the handler of the child is clicked, the handler of parent will also work as if it were clicked',
         'for, while and do-while',
         'Variables that are available throughout the length of the code']
     },
     {
     ask: 'What is event bubbling?',
     correct: 'When elements are nested, if the handler of the child is clicked, the handler of parent will also work as if it were clicked',
-    wrong: ['for, while and do-while',
+    wrong: ['When elements are nested, if the handler of the child is clicked, the handler of parent will also work as if it were clicked', 'for, while and do-while',
         'An operator that is used to return a string description of the type of a variable',
         'Refers to the object from where it was called']
     },
     {
     ask: 'What is a looping structure in JavaScript?',
     correct: 'for',
-    wrong: ['Variables that are available throughout the length of the code',
+    wrong: ['for', 'Variables that are available throughout the length of the code',
         'Refers to the object from where it was called',
         'Strict equality operator']
     },
     {
     ask: 'Which is used for comments in Javascript?',
     correct: '//',
-    wrong: ['for, while and do-while',
+    wrong: ['//', 'for, while and do-while',
         'Strict equality operator',
         'Adds an element at the beginning of an array']
     }];
@@ -105,27 +104,30 @@ function hideStartButton() {
 startBtn.addEventListener('click', timerCountdown);
 
 // Adds questions and answers as ordered list. Correct answers increase score, incorrect answers subtract 1s from timer
-function quickQuest(questIndex) {
-    clearPrevious.innerHTML = '';
-    ol.innerHTML = '';
+function quickQuest() {
+    let li = document.querySelectorAll('li');
 
-    for (var i = 0; i < questionArr.length; i++) {
-        let current = questionArr[questIndex].ask;
-        let wrongAns = questionArr[questIndex].wrong;
-        let correctAns = questionArr[questIndex].correct;
-        clearPrevious.textContent = current;
-    }
-
-    userSelec.forEach(function (x) {
-        let li = document.createElement('li');
-        li.textContent = x;
-        questionsDiv.appendChild(ol);
-        ol.appendChild(li);
-        li.addEventListener('click', (compare));
-    })
+    li.forEach((item) => {
+        item.onclick = function() {
+            if (this.innerText === questionArr[i]['correct']) {
+                corrAns.textContent = 'Correct!';
+                // li.forEach(item => item.onclick = '');
+                i++;
+                score++;
+                quickQuest();
+            } else {
+                corrAns.textContent = 'Incorrect';
+                i++;
+                seconds -= 5;
+                quickQuest();
+            };
+        };
+    });
 };
 
-quickQuest(questIndex);
+quickQuest();
+
+function questCheck() {};
 
 // Input initials and view highscores
 // function endCondition() {

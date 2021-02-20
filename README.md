@@ -6,7 +6,7 @@ Rules:
 
 2.) You are awarded 1 point for each correct answer, 0 points for an incorrect answer
 
-3.) Each incorrect answer subtracts 1 second from the timer
+3.) Each incorrect answer subtracts 5 seconds from the timer
 
 4.) When all available questions are answered or the timer reaches zero, the quiz is over. Your points are displayed and you can save your initials (up to four characters)
 

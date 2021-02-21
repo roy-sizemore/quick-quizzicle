@@ -1,11 +1,8 @@
 // Questions and answers derived from: https://www.guru99.com/javascript-interview-questions-answers.html
 let score = 0;
-let highScore = [];
-let initials = [];
 let selection = '';
 let questionIndex = 0;
 const startBtn = document.querySelector('#btn');
-
 
 const questionArr = [
     {
@@ -91,17 +88,18 @@ const questionArr = [
 
 // Timer with view high scores button
 function timerCountdown() {
-    seconds = 10;
+    seconds = 120;
+
     hideStartButton();
     quickQuest();
+
     function stopTimer() {
         document.querySelector('#view-hs').textContent = 'View High Scores';
-        // document.querySelector('#view-hs').onclick = showHS();
         document.querySelector('#timer').textContent = `Time remaining:  ${seconds}`;
         seconds--;
-        if (seconds < 0) {
+        if (seconds < 0 || questionIndex > 9) {
             clearInterval(intervalId);
-            endCondition();
+            endGame();
         };
     };
     intervalId = setInterval(stopTimer, 1000);
@@ -112,9 +110,9 @@ function hideStartButton() {
     document.querySelector('#div-btn').classList.add('hideme');
 };
 
-startBtn.addEventListener('click', quickQuest);
+startBtn.addEventListener('click', timerCountdown);
 
-// Adds questions and answers as ordered list. Correct answers increase score, incorrect answers subtract 1s from timer
+// Adds questions and answers as ordered list. Correct answers increase score, incorrect answers subtract 5s from timer
 function quickQuest() {
     const divOL = document.querySelector('#qust');
     let options = document.querySelector('#options');
@@ -122,7 +120,7 @@ function quickQuest() {
     options.append(ol);
     let currentQuestion = questionArr[questionIndex];
     
-    questionArr[questionIndex].choices.forEach((choice) => {
+    currentQuestion.choices.forEach((choice) => {
         let li = document.createElement('li');
         ol.append(li);
         li.append(choice);
@@ -131,49 +129,74 @@ function quickQuest() {
 
     divOL.prepend(currentQuestion.ask);
 
-    currentQuestion.choices.forEach((item) => {
+    document.querySelectorAll('li').forEach((item) => {
         item.onclick = function() {
             if (this.innerText === questionArr[questionIndex].correct) {
-                console.log(selection.textContent = 'Correct!');
-                questionIndex++;
                 score++;
-                quickQuest();
             } else {
                 selection.textContent = 'Incorrect';
-                questionIndex++;
                 seconds -= 5;
+            };
+
+            questionIndex++;
+            divOL.innerHTML = '';
+            options.innerHTML = '';
+
+            if (questionIndex < 10) {
                 quickQuest();
             };
         };
     });
 };
 
-
-// Input initials and view highscores
-function endCondition() {
-    const divHS = document.createElement('div');
-    const tableHS = document.createElement('tb');
-    const tbHead1 = document.createElement('th');
-    const tbHead2 = document.createElement('th');
-    let td = document.createElement('td');
-
-    divHS.querySelector('#view-hs');
-    tableHS.querySelector('#hs-table');
-    tbHead1.querySelector('.table-head');
-    tbHead2.querySelector('.table-head');
-    td.querySelectorAll('table-data');
-    
-    divHS.append(tableHS);
-    tableHS.append(tbHead1);
-    tableHS.append(tbHead2);
-
-// Add form for initials to the left of highScore (add table)
+/* End condition - when the time is up or the questions are exhausted, the score is posted on the screen, 
+   the user is prompted to enter their initials and the user's initials and score are stored in localStorage. */
+function endGame() {
+    document.querySelector('#timer').textContent = `Time's up!`;
+    document.querySelector('#qust').textContent = 'Game Over! You scored ' + score + ' out of 10.';
+    options.innerHTML = "<form><input type='text' id='inits'><button type='submit'>Enter your initials</button></form>";
+    options.addEventListener('submit', addNewScore);
+    document.querySelector('#qust').append(initDiv);
 };
 
-// inputInitials(){
-    // input initials
-// }
+let viewHS = document.querySelector('#view-hs');
+viewHS.addEventListener('click', showScores);
 
-// endCondition(){
-    // runs the inputInitials and createHS functions
-// }
+function addNewScore(event){
+    event.preventDefault();
+
+    let champInits = document.querySelector('#inits').value;
+    let finalScore = {};
+    finalScore[champInits] = score;
+    let stringScore = JSON.stringify(finalScore);
+
+    if (!localStorage.getItem('highscores')){
+        localStorage.setItem('highscores', stringScore);
+        let scoreArr = [];
+        scoreArr.push(finalScore);
+    } else {
+        let highScores = (localStorage.getItem('highscores'));
+        let stringAdd = highScores + ', ' + stringScore;
+        localStorage.setItem('highscores', stringAdd);
+    };
+
+    options.innerHTML = '';
+};
+
+// To view high scores, click "View High Scores"
+function showScores(){
+    let highScores = (localStorage.getItem('highscores'));
+    let ul = document.createElement('ul');
+    highScores = highScores.split(',');
+
+    for (i = 0; i < highScores.length; i++) {
+        let stat = JSON.parse(highScores[i]);
+        let li = document.createElement('li');
+        li.textContent = Object.keys(stat) + ': ' + Object.values(stat);
+        ul.append(li);
+    };
+
+    viewHS.append(ul);
+    viewHS.removeEventListener('click', showScores);
+};
+

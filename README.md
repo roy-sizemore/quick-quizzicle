@@ -18,5 +18,5 @@ Link to published site:
 https://roy-sizemore.github.io/quick-quizzicle/
 
 Demo:
-<video width="320" height="240"><src="https://github.com/roy-sizemore/screenshots/blob/main/qq_demo.mp4" type="video/mp4"></video>
+<video width="320" height="240" src="https://github.com/roy-sizemore/screenshots/blob/main/qq_demo.mp4" type="video/mp4"></video>
 

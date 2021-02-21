@@ -15,7 +15,7 @@ Rules:
 Written in JavaScript, HTML and CSS. For OSU Coding Bootcamp homework 4, Web APIs Code Quiz.
 
 Link to published site:
-[Coming Soon]
+https://roy-sizemore.github.io/quick-quizzicle/
 
 Demo:
 [Coming Soon]
